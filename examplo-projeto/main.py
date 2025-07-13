@@ -30,7 +30,7 @@ class JogoAdivinhacao:
 ║                    🎮 JOGO DA ADIVINHAÇÃO 🎮                ║
 ║                                                              ║
 ║  Tente adivinhar o número secreto entre 1 e 100!           ║
-║  Você tem 10 tentativas. Boa sorte!                        ║
+║  Você tem 15 tentativas. Boa sorte!                        ║
 ╚══════════════════════════════════════════════════════════════╝
         """
         print(banner)
@@ -112,7 +112,7 @@ class JogoAdivinhacao:
         """Executa uma rodada do jogo"""
         numero_secreto = random.randint(1, 100)
         tentativas_usadas = 0
-        max_tentativas = 10
+        max_tentativas = 15
         
         print(f"\n🎯 {self.nome_jogador}, o número secreto foi escolhido!")
         print(f"📊 Você tem {max_tentativas} tentativas\n")
