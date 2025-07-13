@@ -107,12 +107,12 @@ class JogoAdivinhacao:
         for i, recorde in enumerate(self.recordes, 1):
             print(f"{i}º {recorde['nome']} - {recorde['pontuacao']} pts "
                   f"({recorde['tentativas']} tentativas) - {recorde['data']}")
-    
+
     def jogar_rodada(self):
         """Executa uma rodada do jogo"""
-        numero_secreto = random.randint(1, 100)
+        numero_secreto = random.randint(1, 50)
         tentativas_usadas = 0
-        max_tentativas = 15
+        max_tentativas = 10
         
         print(f"\n🎯 {self.nome_jogador}, o número secreto foi escolhido!")
         print(f"📊 Você tem {max_tentativas} tentativas\n")
