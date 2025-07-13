@@ -29,8 +29,8 @@ class JogoAdivinhacao:
 ╔══════════════════════════════════════════════════════════════╗
 ║                    🎮 JOGO DA ADIVINHAÇÃO 🎮                ║
 ║                                                              ║
-║  Tente adivinhar o número secreto entre 1 e 100!           ║
-║  Você tem 15 tentativas. Boa sorte!                        ║
+║  Tente adivinhar o número secreto entre 1 e 50!              ║
+║  Você tem 10 tentativas. Boa sorte!                          ║
 ╚══════════════════════════════════════════════════════════════╝
         """
         print(banner)
