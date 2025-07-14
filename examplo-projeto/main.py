@@ -10,14 +10,11 @@ import random
 import time
 import os
 import sys
-from datetime import datetime
 
 class JogoAdivinhacao:
     def __init__(self):
         self.pontuacao = 0
         self.tentativas = 0
-        self.recordes = []
-        self.nome_jogador = ""
         
     def limpar_tela(self):
         """Limpa a tela do terminal"""
@@ -34,15 +31,6 @@ class JogoAdivinhacao:
 ╚══════════════════════════════════════════════════════════════╝
         """
         print(banner)
-    
-    def obter_nome_jogador(self):
-        """Solicita e valida o nome do jogador"""
-        while True:
-            nome = input("🎯 Digite seu nome: ").strip()
-            if len(nome) >= 2:
-                self.nome_jogador = nome
-                break
-            print("❌ Nome deve ter pelo menos 2 caracteres!")
     
     def animacao_carregamento(self, duracao=2):
         """Exibe uma animação de carregamento"""
@@ -83,38 +71,13 @@ class JogoAdivinhacao:
         penalidade_por_tentativa = 50
         return max(100, pontuacao_base - (tentativas_usadas - 1) * penalidade_por_tentativa)
     
-    def salvar_recorde(self, pontuacao, tentativas):
-        """Salva o recorde do jogador"""
-        recorde = {
-            'nome': self.nome_jogador,
-            'pontuacao': pontuacao,
-            'tentativas': tentativas,
-            'data': datetime.now().strftime("%d/%m/%Y %H:%M")
-        }
-        self.recordes.append(recorde)
-        self.recordes.sort(key=lambda x: x['pontuacao'], reverse=True)
-        if len(self.recordes) > 5:
-            self.recordes = self.recordes[:5]
-    
-    def mostrar_recordes(self):
-        """Exibe os melhores recordes"""
-        if not self.recordes:
-            print("📊 Nenhum recorde ainda!")
-            return
-        
-        print("\n🏆 MELHORES RECORDES:")
-        print("=" * 50)
-        for i, recorde in enumerate(self.recordes, 1):
-            print(f"{i}º {recorde['nome']} - {recorde['pontuacao']} pts "
-                  f"({recorde['tentativas']} tentativas) - {recorde['data']}")
-
     def jogar_rodada(self):
         """Executa uma rodada do jogo"""
         numero_secreto = random.randint(1, 50)
         tentativas_usadas = 0
         max_tentativas = 10
         
-        print(f"\n🎯 {self.nome_jogador}, o número secreto foi escolhido!")
+        print(f"\n🎯 O número secreto foi escolhido!")
         print(f"📊 Você tem {max_tentativas} tentativas\n")
         
         while tentativas_usadas < max_tentativas:
@@ -139,12 +102,11 @@ class JogoAdivinhacao:
                 pontuacao = self.calcular_pontuacao(tentativas_usadas)
                 self.pontuacao += pontuacao
                 
-                print(f"\n🎉 PARABÉNS, {self.nome_jogador}!")
+                print(f"\n🎉 PARABÉNS!")
                 print(f"🎯 Você acertou em {tentativas_usadas} tentativas!")
                 print(f"🏆 Pontuação desta rodada: {pontuacao}")
                 print(f"💰 Pontuação total: {self.pontuacao}")
                 
-                self.salvar_recorde(pontuacao, tentativas_usadas)
                 return True
             
             else:
@@ -165,32 +127,20 @@ class JogoAdivinhacao:
             self.limpar_tela()
             self.mostrar_banner()
             
-            print(f"👤 Jogador: {self.nome_jogador}")
             print(f"💰 Pontuação Total: {self.pontuacao}")
             print("\n" + "=" * 50)
             print("📋 MENU PRINCIPAL:")
             print("1. 🎮 Jogar")
-            print("2. 🏆 Ver Recordes")
-            print("3. 🔄 Novo Jogador")
-            print("4. ❌ Sair")
+            print("2. ❌ Sair")
             print("=" * 50)
             
-            opcao = input("🎯 Escolha uma opção (1-4): ").strip()
+            opcao = input("🎯 Escolha uma opção (1-2): ").strip()
             
             if opcao == "1":
                 self.jogar_rodada()
                 input("\n⏸️  Pressione ENTER para continuar...")
             
             elif opcao == "2":
-                self.mostrar_recordes()
-                input("\n⏸️  Pressione ENTER para continuar...")
-            
-            elif opcao == "3":
-                self.nome_jogador = ""
-                self.pontuacao = 0
-                self.obter_nome_jogador()
-            
-            elif opcao == "4":
                 print("👋 Obrigado por jogar! Até a próxima!")
                 break
             
@@ -203,7 +153,6 @@ class JogoAdivinhacao:
         try:
             self.limpar_tela()
             self.mostrar_banner()
-            self.obter_nome_jogador()
             self.animacao_carregamento()
             self.menu_principal()
             
